@@ -3,41 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>King Swipe • Film & Oyun Reels</title>
+  <title>King Decision Hub • Reels & Roulette</title>
   <link rel="stylesheet" href="style.css">
-  <meta name="theme-color" content="#0d0f17">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-  <!-- Üst Bar (Mod Seçimi & Favori Butonu) -->
+  <!-- Background Blur Glows -->
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+
+  <!-- App Header -->
   <header class="app-header">
-    <div class="mode-switch">
-      <button id="btn-movies" class="mode-btn active">🎬 Filmler</button>
-      <button id="btn-games" class="mode-btn">🎮 Oyunlar</button>
+    <div class="brand">
+      <i class="fa-solid fa-crown brand-icon"></i>
+      <span>KING<span class="highlight">DECIDE</span></span>
     </div>
-    <button id="btn-open-watchlist" class="watchlist-toggle-btn">
-      ⭐ <span id="watchlist-count">0</span>
-    </button>
+
+    <!-- Mode Selector -->
+    <div class="mode-switch">
+      <button id="btn-movies" class="mode-btn active"><i class="fa-solid fa-film"></i> Filmler</button>
+      <button id="btn-games" class="mode-btn"><i class="fa-solid fa-gamepad"></i> Oyunlar</button>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="header-actions">
+      <button id="btn-toggle-view" class="icon-btn" title="Görünüm Değiştir (Reels/Rulet)">
+        <i class="fa-solid fa-sync"></i>
+      </button>
+      <button id="btn-open-watchlist" class="watchlist-toggle-btn">
+        <i class="fa-solid fa-star"></i>
+        <span id="watchlist-count">0</span>
+      </button>
+    </div>
   </header>
 
-  <!-- Reels / Tinder Tarzı Kart Alanı -->
-  <main class="reels-container" id="reels-container">
+  <!-- Filter Drawer / Bar -->
+  <div class="filter-bar">
+    <select id="genre-select" class="custom-select">
+      <option value="">🎭 Tüm Türler</option>
+      <!-- Dinamik Yüklenecek -->
+    </select>
+    
+    <select id="sort-select" class="custom-select">
+      <option value="popularity.desc">🔥 Popülerler</option>
+      <option value="vote_average.desc">⭐ En Yüksek Puanlılar</option>
+      <option value="primary_release_date.desc">✨ Yeni Çıkanlar</option>
+    </select>
+  </div>
+
+  <!-- Main View 1: REELS / SWIPE MODE -->
+  <main id="reels-view" class="view-container active-view">
     <div class="card-stack" id="card-stack">
-      <!-- Dinamik Reels Kartı JS Tarafından Buraya Gelecek -->
+      <!-- Dinamik Yüklenen Reels Kartı -->
+      <div class="loading-spinner">
+        <i class="fa-solid fa-circle-notch fa-spin"></i>
+        <p>İçerikler Çekiliyor...</p>
+      </div>
     </div>
 
-    <!-- Alt Etkileşim Butonları -->
     <div class="actions-bar">
-      <button id="btn-skip" class="action-btn skip" title="Pas Geç">❌</button>
-      <button id="btn-star" class="action-btn star" title="İzleneceklere Ekle">⭐</button>
+      <button id="btn-skip" class="action-btn skip" title="Pas Geç (Sola Kaydır)"><i class="fa-solid fa-xmark"></i></button>
+      <button id="btn-trailer" class="action-btn trailer" title="Fragmanı İzle"><i class="fa-solid fa-play"></i></button>
+      <button id="btn-star" class="action-btn star" title="İzleneceklere Ekle (Sağa Kaydır)"><i class="fa-solid fa-star"></i></button>
     </div>
   </main>
 
-  <!-- ⭐ Yıldızlananlar / İzlenecekler Modalı -->
+  <!-- Main View 2: RULET / ÇARK MODE -->
+  <main id="roulette-view" class="view-container hidden-view">
+    <div class="roulette-box glass-card">
+      <div class="roulette-header">
+        <h2>🎲 Kararsızlık Çözücü Çark</h2>
+        <p>Kriterlerine uyan 200+ popüler içerik arasından şansına ne çıkacak?</p>
+      </div>
+
+      <div class="wheel-display" id="wheel-display">
+        <i class="fa-solid fa-dice dice-icon"></i>
+        <span id="roulette-result-text">Çarkı Çevirmeye Hazır mısın?</span>
+      </div>
+
+      <button id="btn-spin" class="spin-btn">
+        <i class="fa-solid fa-arrows-rotate"></i> Şansımı Dene!
+      </button>
+    </div>
+  </main>
+
+  <!-- Trailer Pop-Up Modal -->
+  <div id="trailer-modal" class="modal-overlay hidden">
+    <div class="modal-content glass-card trailer-content">
+      <button id="btn-close-trailer" class="close-btn">&times;</button>
+      <div class="video-container">
+        <iframe id="trailer-iframe" src="" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Watchlist Modal -->
   <div id="watchlist-modal" class="modal-overlay hidden">
     <div class="modal-content glass-card">
       <div class="modal-header">
-        <h2>⭐ İzlenecekler & Oynanacaklar Listem</h2>
+        <h2>⭐ Kaydedilen Favorilerim</h2>
         <button id="btn-close-watchlist" class="close-btn">&times;</button>
       </div>
       <div class="modal-body" id="watchlist-items">
