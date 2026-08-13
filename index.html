@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>King Swipe • Film & Oyun Reels</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#0d0f17">
+</head>
+<body>
+
+  <!-- Üst Bar (Mod Seçimi & Favori Butonu) -->
+  <header class="app-header">
+    <div class="mode-switch">
+      <button id="btn-movies" class="mode-btn active">🎬 Filmler</button>
+      <button id="btn-games" class="mode-btn">🎮 Oyunlar</button>
+    </div>
+    <button id="btn-open-watchlist" class="watchlist-toggle-btn">
+      ⭐ <span id="watchlist-count">0</span>
+    </button>
+  </header>
+
+  <!-- Reels / Tinder Tarzı Kart Alanı -->
+  <main class="reels-container" id="reels-container">
+    <div class="card-stack" id="card-stack">
+      <!-- Dinamik Reels Kartı JS Tarafından Buraya Gelecek -->
+    </div>
+
+    <!-- Alt Etkileşim Butonları -->
+    <div class="actions-bar">
+      <button id="btn-skip" class="action-btn skip" title="Pas Geç">❌</button>
+      <button id="btn-star" class="action-btn star" title="İzleneceklere Ekle">⭐</button>
+    </div>
+  </main>
+
+  <!-- ⭐ Yıldızlananlar / İzlenecekler Modalı -->
+  <div id="watchlist-modal" class="modal-overlay hidden">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h2>⭐ İzlenecekler & Oynanacaklar Listem</h2>
+        <button id="btn-close-watchlist" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body" id="watchlist-items">
+        <!-- Yıldızlanan İçerikler -->
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
